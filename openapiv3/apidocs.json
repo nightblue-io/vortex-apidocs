@@ -1,0 +1,98 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "vortex/v1/vortex.proto",
+    "version": "version not set"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Vortex",
+      "description": "(ALPHA) Vortex API. Base URL: https://api.nightblue.io",
+      "externalDocs": {
+        "description": "Service definition",
+        "url": "https://github.com/nightblue-io/vortex-proto/tree/main/vortex/v1"
+      }
+    }
+  ],
+  "paths": {
+    "/vortex/v0/info": {
+      "get": {
+        "tags": [
+          "Vortex"
+        ],
+        "summary": "Testing endpoint.",
+        "operationId": "Vortex_GetInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetInfoResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "protobufAny": {
+        "type": "object",
+        "properties": {
+          "@type": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "rpcStatus": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/protobufAny"
+            }
+          }
+        }
+      },
+      "v1GetInfoResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "type": "string"
+          }
+        },
+        "description": "Request message for the GetInfo rpc."
+      }
+    }
+  },
+  "x-original-swagger-version": "2.0"
+}
