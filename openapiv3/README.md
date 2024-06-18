@@ -1,0 +1,1 @@
+The OpenAPI Specification Version3 documentation is automatically generated in this directory
