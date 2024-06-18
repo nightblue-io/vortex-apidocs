@@ -1,1 +1,1 @@
-Generated docs: https://nightblue-io.github.io/vortex-apidocs/
+Generates the docs on https://nightblue-io.github.io/vortex-apidocs/.
