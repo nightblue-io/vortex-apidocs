@@ -18,9 +18,48 @@
         "description": "See here for the service definition.",
         "url": "https://github.com/nightblue-io/vortex-proto/tree/main/vortex/v1"
       }
+    },
+    {
+      "name": "Iam",
+      "description": "(ALPHA) IAM API. Base URL: https://api.nightblue.io",
+      "externalDocs": {
+        "description": "See here for the service definition.",
+        "url": "https://github.com/nightblue-io/vortex-proto/tree/main/iam/v1"
+      }
     }
   ],
   "paths": {
+    "/vortex/iam/v0/whoami": {
+      "get": {
+        "tags": [
+          "Iam"
+        ],
+        "summary": "Testing endpoint.",
+        "operationId": "Iam_WhoAmI",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1WhoAmIResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/vortex/v0/info": {
       "get": {
         "tags": [
@@ -92,6 +131,21 @@
           }
         },
         "description": "Request message for the GetInfo rpc."
+      },
+      "v1WhoAmIResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "description": "Request message for the WhoAmI rpc."
       }
     }
   },
