@@ -29,6 +29,92 @@
     }
   ],
   "paths": {
+    "/vortex/iam/v0/login": {
+      "post": {
+        "tags": [
+          "Iam"
+        ],
+        "summary": "Create an account for the Vortex Platform.",
+        "operationId": "Iam_Login",
+        "requestBody": {
+          "description": "Request message for the Login rpc.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1LoginResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/vortex/iam/v0/signup": {
+      "post": {
+        "tags": [
+          "Iam"
+        ],
+        "summary": "Create an account for the Vortex Platform.",
+        "operationId": "Iam_SignUp",
+        "requestBody": {
+          "description": "Request message for the SignUp rpc.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1SignUpRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1SignUpResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
     "/vortex/iam/v0/whoami": {
       "get": {
         "tags": [
@@ -131,6 +217,63 @@
           }
         },
         "description": "Request message for the GetInfo rpc."
+      },
+      "v1LoginRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "description": "Request message for the Login rpc."
+      },
+      "v1LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the Login rpc."
+      },
+      "v1SignUpRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional. The name of the account to register."
+          },
+          "email": {
+            "type": "string",
+            "description": "Required. The email address of the account to register."
+          },
+          "password": {
+            "type": "string",
+            "description": "Optional. A generated password will be provided if empty."
+          }
+        },
+        "description": "Request message for the SignUp rpc."
+      },
+      "v1SignUpResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the SignUp rpc."
       },
       "v1WhoAmIResponse": {
         "type": "object",
