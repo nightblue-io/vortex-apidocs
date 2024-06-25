@@ -27,7 +27,7 @@
       "description": "(ALPHA) Operations API. Base URL: https://api.nightblue.io",
       "externalDocs": {
         "description": "See here for the service definition.",
-        "url": "https://github.com/nightblue-io/vortex-proto/tree/main/longrunning/v1"
+        "url": "https://github.com/nightblue-io/vortex-proto/tree/main/operations/v1"
       }
     }
   ],
@@ -161,7 +161,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/longrunningv1Operation"
+              "$ref": "#/definitions/operationsv1Operation"
             }
           },
           "default": {
@@ -432,7 +432,7 @@
       "type": "object",
       "description": "Request message for the CancelOperation rpc."
     },
-    "longrunningv1Operation": {
+    "operationsv1Operation": {
       "type": "object",
       "properties": {
         "name": {
@@ -562,7 +562,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/longrunningv1Operation"
+            "$ref": "#/definitions/operationsv1Operation"
           }
         },
         "nextToken": {
