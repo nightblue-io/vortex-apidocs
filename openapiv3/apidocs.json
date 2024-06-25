@@ -592,11 +592,53 @@
         },
         "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors)."
       },
+      "typesAWSInfo": {
+        "type": "object",
+        "properties": {
+          "roleArn": {
+            "type": "string",
+            "description": "Prioritized over id/secret."
+          },
+          "clientIdArn": {
+            "type": "string"
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/vortexprototypesLocation"
+          }
+        }
+      },
+      "typesGCPInfo": {
+        "type": "object",
+        "properties": {
+          "serviceAccount": {
+            "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+            "type": "string",
+            "format": "byte"
+          },
+          "location": {
+            "$ref": "#/components/schemas/vortexprototypesLocation"
+          }
+        }
+      },
       "v1CreateEnvironmentRequest": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string"
+          },
+          "profile": {
+            "title": "Valid values:",
+            "type": "string",
+            "description": "SC_MR_GCP\nSC_SR_GCP\nSC_MR_AWS\nSC_SR_AWS\nMC_AUTO"
+          },
+          "gcpInfo": {
+            "$ref": "#/components/schemas/typesGCPInfo"
+          },
+          "awsInfo": {
+            "$ref": "#/components/schemas/typesAWSInfo"
           }
         },
         "description": "Request message for the CreateEnvironment rpc."
@@ -606,6 +648,9 @@
         "properties": {
           "name": {
             "type": "string"
+          },
+          "operation": {
+            "$ref": "#/components/schemas/operationsv1Operation"
           }
         },
         "description": "Response message for the CreateEnvironment rpc."
@@ -719,6 +764,27 @@
           }
         },
         "description": "Request message for the WhoAmI rpc."
+      },
+      "vortexprototypesLocation": {
+        "type": "object",
+        "properties": {
+          "activeZone": {
+            "type": "string",
+            "description": "If set, prioritize over active region."
+          },
+          "activeRegion": {
+            "type": "string",
+            "description": "Valid only when active zone is not set."
+          },
+          "passiveZone": {
+            "type": "string",
+            "description": "If set, prioritize over passive region."
+          },
+          "passiveRegion": {
+            "type": "string",
+            "description": "Valid only when passive zone is not set."
+          }
+        }
       }
     }
   },
