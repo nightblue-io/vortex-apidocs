@@ -484,6 +484,9 @@
         }
       }
     },
+    "typesAzureInfo": {
+      "type": "object"
+    },
     "typesGCPInfo": {
       "type": "object",
       "properties": {
@@ -512,6 +515,10 @@
         },
         "awsInfo": {
           "$ref": "#/definitions/typesAWSInfo"
+        },
+        "azureInfo": {
+          "$ref": "#/definitions/typesAzureInfo",
+          "description": "TBD."
         }
       },
       "description": "Request message for the CreateEnvironment rpc."

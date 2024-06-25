@@ -587,6 +587,9 @@
           }
         }
       },
+      "typesAzureInfo": {
+        "type": "object"
+      },
       "typesGCPInfo": {
         "type": "object",
         "properties": {
@@ -616,6 +619,9 @@
           },
           "awsInfo": {
             "$ref": "#/components/schemas/typesAWSInfo"
+          },
+          "azureInfo": {
+            "$ref": "#/components/schemas/typesAzureInfo"
           }
         },
         "description": "Request message for the CreateEnvironment rpc."
