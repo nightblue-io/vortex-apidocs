@@ -155,20 +155,31 @@
         }
       }
     },
-    "/vortex/v0/info": {
-      "get": {
+    "/vortex/v1:do": {
+      "post": {
         "tags": [
           "Vortex"
         ],
         "summary": "Testing endpoint.",
-        "operationId": "Vortex_GetInfo",
+        "operationId": "Vortex_Do",
+        "requestBody": {
+          "description": "Request message for the Do rpc.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1DoRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "A successful response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/v1GetInfoResponse"
+                  "$ref": "#/components/schemas/v1DoResponse"
                 }
               }
             }
@@ -183,7 +194,8 @@
               }
             }
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     }
   },
@@ -239,14 +251,23 @@
         },
         "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors)."
       },
-      "v1GetInfoResponse": {
+      "v1DoRequest": {
         "type": "object",
         "properties": {
-          "info": {
+          "data": {
             "type": "string"
           }
         },
-        "description": "Request message for the GetInfo rpc."
+        "description": "Request message for the Do rpc."
+      },
+      "v1DoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          }
+        },
+        "description": "Request message for the Do rpc."
       },
       "v1LoginRequest": {
         "type": "object",
