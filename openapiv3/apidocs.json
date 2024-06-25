@@ -197,6 +197,10 @@
           },
           "verificationUriComplete": {
             "type": "string"
+          },
+          "expiresIn": {
+            "type": "string",
+            "format": "int64"
           }
         }
       },
