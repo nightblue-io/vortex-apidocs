@@ -26,6 +26,14 @@
         "description": "See here for the service definition.",
         "url": "https://github.com/nightblue-io/vortex-proto/tree/main/iam/v1"
       }
+    },
+    {
+      "name": "Operations",
+      "description": "(ALPHA) Operations API. Base URL: https://api.nightblue.io",
+      "externalDocs": {
+        "description": "See here for the service definition.",
+        "url": "https://github.com/nightblue-io/vortex-proto/tree/main/longrunning/v1"
+      }
     }
   ],
   "paths": {
@@ -81,49 +89,6 @@
         "x-codegen-request-body-name": "body"
       }
     },
-    "/vortex/iam/v1/signup": {
-      "post": {
-        "tags": [
-          "Iam"
-        ],
-        "summary": "Create an account for the Vortex Platform.",
-        "operationId": "Iam_SignUp",
-        "requestBody": {
-          "description": "Request message for the SignUp rpc.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/v1SignUpRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/v1SignUpResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/rpcStatus"
-                }
-              }
-            }
-          }
-        },
-        "x-codegen-request-body-name": "body"
-      }
-    },
     "/vortex/iam/v1/whoami": {
       "get": {
         "tags": [
@@ -147,6 +112,346 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v1WhoAmIResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vortex/ops/v1": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "List long-running operations.",
+        "operationId": "Operations_ListOperations",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nextToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ListOperationsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vortex/ops/v1/{name}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Get a long-running operation.",
+        "operationId": "Operations_GetOperation",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/longrunningv1Operation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Delete a long-running operation.",
+        "operationId": "Operations_DeleteOperation",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vortex/ops/v1/{name}:cancel": {
+      "post": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Cancel a long-running operation.",
+        "operationId": "Operations_CancelOperation",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperationsCancelOperationBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/vortex/v1/envs": {
+      "get": {
+        "tags": [
+          "Vortex"
+        ],
+        "summary": "List deployment environments.",
+        "operationId": "Vortex_ListEnvironments",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1ListEnvironmentsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Vortex"
+        ],
+        "summary": "Create a deployment environment.",
+        "operationId": "Vortex_CreateEnvironment",
+        "requestBody": {
+          "description": "Request message for the CreateEnvironment rpc.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/v1CreateEnvironmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1CreateEnvironmentResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/vortex/v1/envs/{name}": {
+      "get": {
+        "tags": [
+          "Vortex"
+        ],
+        "summary": "Describe a deployment environment.",
+        "operationId": "Vortex_GetEnvironment",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1GetEnvironmentResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/rpcStatus"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Vortex"
+        ],
+        "summary": "Delete a deployment environment.",
+        "operationId": "Vortex_DeleteEnvironment",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v1DeleteEnvironmentResponse"
                 }
               }
             }
@@ -225,6 +530,33 @@
           }
         }
       },
+      "OperationsCancelOperationBody": {
+        "type": "object",
+        "description": "Request message for the CancelOperation rpc."
+      },
+      "longrunningv1Operation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The server-assigned name, which is only unique within the same service that\noriginally returns it. If you use the default HTTP mapping, the\n`name` should be a resource name ending with `operations/{unique_id}`."
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "done": {
+            "type": "boolean",
+            "description": "If the value is `false`, it means the operation is still in progress.\nIf `true`, the operation is completed, and either `error` or `response` is\navailable."
+          },
+          "error": {
+            "$ref": "#/components/schemas/rpcStatus"
+          },
+          "response": {
+            "$ref": "#/components/schemas/protobufAny"
+          }
+        },
+        "description": "This resource represents a long-running operation that is the result of a\nnetwork API call."
+      },
       "protobufAny": {
         "type": "object",
         "properties": {
@@ -260,6 +592,33 @@
         },
         "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors)."
       },
+      "v1CreateEnvironmentRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Request message for the CreateEnvironment rpc."
+      },
+      "v1CreateEnvironmentResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the CreateEnvironment rpc."
+      },
+      "v1DeleteEnvironmentResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the DeleteEnvironment rpc."
+      },
       "v1DoRequest": {
         "type": "object",
         "properties": {
@@ -276,7 +635,40 @@
             "type": "string"
           }
         },
-        "description": "Request message for the Do rpc."
+        "description": "Response message for the Do rpc."
+      },
+      "v1GetEnvironmentResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the GetEnvironment rpc."
+      },
+      "v1ListEnvironmentsResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the ListEnvironments rpc."
+      },
+      "v1ListOperationsResponse": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/longrunningv1Operation"
+            }
+          },
+          "nextToken": {
+            "type": "string"
+          }
+        },
+        "description": "Response message for the ListOperations rpc."
       },
       "v1LoginRequest": {
         "type": "object",
@@ -312,42 +704,6 @@
           }
         },
         "description": "Response message for the Login rpc."
-      },
-      "v1SignUpRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional. The name of the account to register."
-          },
-          "email": {
-            "type": "string",
-            "description": "Required. The email address of the account to register."
-          },
-          "password": {
-            "type": "string",
-            "description": "Optional. A generated password will be provided if empty."
-          }
-        },
-        "description": "Request message for the SignUp rpc."
-      },
-      "v1SignUpResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "description": "Response message for the SignUp rpc."
       },
       "v1WhoAmIResponse": {
         "type": "object",
